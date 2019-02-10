@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+<style>
+    body{background: lightskyblue}
+    body{font-family: "Trebuchet MS"}
+    body{margin: 0}
+    body{padding: 0}
+    header{
+        width: 100%;
+        height: 40px;
+        display: block;
+        background-color: #000000;
+    }
+</style>
+</head>
+<body>
+
+<header>
+<button type="button" onclick="location.href='{% url 'log' %}'" style="position: absolute; top: 5px; right: 5px">Logout</button>
+</header>
+
+MESB Connected Peripherals:<br>
+<button type="button" onclick="location.href='{% url 'check' %}'">Current Data</button><br>
+MESB Data:<br>
+<button type="button">Load Data</button><br>
+MESB Settings:<br>
+<button type="button">Update View</button></div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+        position : absolute;
+        right : 10px;
+        top : 5px
+        }
+        body{background: lightskyblue}
+        body{font-family: "Trebuchet MS"}
+        header{
+        width: 100%;
+        height: 40px;
+        display: block;
+        background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+
+
+<div>
+
+<button type="button" onclick="location.href='{% url 'log' %}'">Logout</button>
+    </div>
+Welcome {{e}}
+<br><br>
+
+</body>
+</html>
