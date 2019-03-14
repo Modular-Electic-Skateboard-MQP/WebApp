@@ -9,9 +9,12 @@
         right : 10px;
         top : 5px
         }
-        body{background: lightskyblue}
-        body{font-family: "Trebuchet MS"}
+        body{background: lightskyblue;
+            font-family: "Trebuchet MS";
+            margin: 0;
+            padding: 0}
         header{
+            position: absolute;
         width: 100%;
         height: 40px;
         display: block;
@@ -24,10 +27,14 @@
 
 <div>
 
-<button type="button" onclick="location.href='{% url 'log' %}'">Logout</button>
+<header>
+<button type="button" onclick="location.href='{% url 'log' %}'" style="position: absolute; top: 5px; right: 5px">Logout</button>
+</header>
     </div>
-Welcome {{e}}
 <br><br>
+Name:
+ <!--<a href="/post_check2/?x={{name}}" > {{name}}</a>-->
+<br>
 
 </body>
 </html>

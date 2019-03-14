@@ -39,14 +39,17 @@ Peripherals:
 <br>
 {% for names, peripherals in comb_lis %}
 {{names}} &nbsp;{{peripherals}} &nbsp;
-{% for vars_names, vars, vars_size, vars_type, vals in comb_lis2 %}
+{% for vars_names, vars, vars_size, vars_type, temp2 in comb_lis2 %}
 <br>
  <!--<a href="/post_curr_check2/?b={{p}}" style="border:2px; border-style:solid; border-color:#003366;"> {{names}}</a>-->
 {{vars_names}} &nbsp; {{vars}} &nbsp;
 <br>
 {{vars_size}} &nbsp; {{vars_type}} &nbsp;
 <br>
-{{vals}} &nbsp;
+{% for key, value in temp2.items %}
+    {{ key }}: &nbsp; {{ value }} &nbsp;
+    <br>
+{% endfor %}
 {% endfor %}
 <br>
 

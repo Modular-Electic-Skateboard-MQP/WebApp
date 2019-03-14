@@ -28,13 +28,9 @@
 <button type="button" onclick="location.href='{% url 'log' %}'">Logout</button>
     </div>
 <br><br>
-Runs:
+Run:
 <br>
-{% for r in RID %}
-
- <a href="/post_check/?z={{r}}" style="border:2px; border-style:solid; border-color:#003366;"> {{r}}</a>
+ <a href="/post_curr_check/?a={{RID}}" style="border:2px; border-style:solid; border-color:#003366;"> {{RID}}</a>
 <br>
-
-{% endfor %}
 </body>
 </html>

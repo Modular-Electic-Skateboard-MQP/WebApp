@@ -72,7 +72,6 @@ def post_create(request):
 
 
 def check(request):
-    import datetime
 
     idtoken = session_id
 
@@ -80,8 +79,6 @@ def check(request):
     runs = list()
     durations = list()
     peripherals = list()
-    functions = list()
-    vars = list()
 
     runID = database.child('runs').shallow().get().val()
     runID = list(runID)
@@ -89,14 +86,6 @@ def check(request):
         runs.append(database.child('runs/' + i).get().val())
         durations.append(database.child('runs/' + i + '/duration').get().val())
         peripherals.append(database.child('runs/' + i + '/peripherals').shallow().get().val())
-        for p in peripherals:
-            p = list(p)
-            for x in range(len(p)):
-                #print(p[x])
-                functions.append(database.child('runs' + i + '/peripherals' + p[x] + 'funcs').shallow().get().val())
-                #print(functions)
-                vars.append(database.child('runs' + i + '/peripherals' + p[x] + 'Vars').get().val())
-
     #print(runID)
     #print(runs)
     #print(durations)
@@ -106,17 +95,105 @@ def check(request):
     #comb_lis = zip(runID, durations)
     return render(request, 'check.html', {'RID': runID})
 
+def curr_check(request):
+
+    idtoken = session_id
+
+    runID = list()
+    runs = list()
+    durations = list()
+    peripherals = list()
+
+    runID = database.child('runs').shallow().get().val()
+    runID = list(runID)[-1]
+    temp = ""
+    for x in runID:
+        temp+=x
+    return render(request, 'curr_check.html', {'RID': temp})
+
+def post_curr_check(request):
+
+    run = request.GET.get('a')
+    peripherals = database.child('runs/' + run + '/peripherals').shallow().get().val()
+    peripherals = list(peripherals)
+    names = list()
+    vars = list()
+    vars_names = list()
+    vars_size = list()
+    vars_type = list()
+    vals = list()
+    val_keys = list()
+    val_vals = list()
+    temp2 = list()
+    for x in range(len(peripherals)):
+        names.append(database.child('runs/' + run + '/peripherals/' + peripherals[x] + '/name').get().val())
+        temp = list(database.child('runs/' + run + '/peripherals/' + peripherals[x] + '/vars').shallow().get().val())
+        vars.append(temp[x])
+
+        for y in range(len(vars)):
+            vars_names.append(database.child(
+                'runs/' + run + '/peripherals/' + peripherals[x] + '/vars/' + vars[y] + '/name').get().val())
+            vars_size.append(database.child(
+                'runs/' + run + '/peripherals/' + peripherals[x] + '/vars/' + vars[y] + '/size').get().val())
+            vars_type.append(database.child(
+                'runs/' + run + '/peripherals/' + peripherals[x] + '/vars/' + vars[y] + '/type').get().val())
+            vals.append(database.child(
+                'runs/' + run + '/peripherals/' + peripherals[x] + '/vars/' + vars[y] + '/val').get().val())
+
+            for aval in vals:
+                temp2.append(sorted(aval.items()))
+
+    #for v in vars:
+    #   if v =
+    print(temp2)
+    comb_list = zip(names, peripherals)
+    comb_list2 = zip(vars_names, vars, vars_size, vars_type, temp2)
+    comb_list3 = zip(val_keys, val_vals)
+    return render(request, 'post_curr_check.html', {'comb_lis': comb_list, 'comb_lis2': comb_list2, 'run': run})
+
 
 def post_check(request):
 
     run = request.GET.get('z')
-    #duration = database.child('runs/' + run + '/duration').get().val()
     peripherals = database.child('runs/' + run + '/peripherals').shallow().get().val()
+    peripherals = list(peripherals)
+    names = list()
+    vars = list()
+    vars_names = list()
+    vars_size = list()
+    vars_type = list()
+    vals = list()
+    val_keys = list()
+    val_vals = list()
+    for x in range(len(peripherals)):
+        names.append(database.child('runs/' + run + '/peripherals/' + peripherals[x] + '/name').get().val())
+        temp = list(database.child('runs/' + run + '/peripherals/' + peripherals[x] + '/vars').shallow().get().val())
+        vars.append(temp[x])
 
-    return render(request, 'post_check.html', {'periphs': peripherals})
+        for y in range(len(vars)):
+            vars_names.append(database.child('runs/' + run + '/peripherals/' + peripherals[x] + '/vars/' + vars[y] + '/name').get().val())
+            vars_size.append(database.child('runs/' + run + '/peripherals/' + peripherals[x] + '/vars/' + vars[y] + '/size').get().val())
+            vars_type.append(database.child('runs/' + run + '/peripherals/' + peripherals[x] + '/vars/' + vars[y] + '/type').get().val())
+            vals.append(database.child('runs/' + run + '/peripherals/' + peripherals[x] + '/vars/' + vars[y] + '/val').get().val())
+
+
+            for key, value in vals[y].items():
+                val_keys.append(key)
+                val_vals.append(value)
+
+    print(vals)
+    comb_list = zip(names, peripherals)
+    comb_list2 = zip(vars_names, vars, vars_size, vars_type, vals)
+    comb_list3 = zip(val_keys, val_vals)
+    return render(request, 'post_check.html', {'comb_lis': comb_list, 'comb_lis2': comb_list2, 'run': run})
+
 
 def post_check2(request):
 
     run = request.GET.get('z')
     peri = request.GET.get('y')
+    print(run)
+    vars = database.child('runs/' + run + '/peripherals').shallow().get().val()
+    print(vars)
+    #{'name': name}
     return render(request, 'post_check2.html')
