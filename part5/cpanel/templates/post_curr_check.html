@@ -3,24 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
-        div{
-        position : absolute;
-        right : 10px;
-        top : 5px
-        }
-        body{background: lightskyblue;
-            font-family: "Trebuchet MS";
-            margin: 0;
-            padding: 0}
-        header{
-            position: absolute;
+
+    html{
+        height: 100%;
+        text-align: center;
+
+        -webkit-perspective: 700px;
+        -moz-perspective: 700px;
+        -ms-perspective: 700px;
+        perspective: 700px;
+    }
+
+    body{
+        height: 100%;
+        background-image: linear-gradient(to bottom right, #aa0b0b, white);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: "Trebuchet MS";
+        margin: 0;
+        padding: 0;
+        text-align: center;
+
+        -webkit-perspective: 700px;
+        -moz-perspective: 700px;
+        -ms-perspective: 700px;
+        perspective: 700px;}
+
+    button {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      outline: 0;
+      -webkit-appearance: none;
+    }
+
+    button {
+      display: inline-block;
+      position: relative;
+      padding: 10px 28px;
+      top: 0;
+      font-size: 10px;
+      font-family: "Trebuchet MS", Helvetica;
+      border-radius: 4px;
+      border-bottom: 1px solid #883e00;
+      background: #883e00;
+      color: #fff;
+      box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.1 );
+
+      -webkit-transform: translateZ(0);
+         -moz-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+              transform: translateZ(0);
+
+      -webkit-transition: all 0.2s ease;
+         -moz-transition: all 0.2s ease;
+          -ms-transition: all 0.2s ease;
+              transition: all 0.2s ease;
+    }
+
+    button:hover {
+      top: -10px;
+      box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
+
+      -webkit-transform: rotateX(20deg);
+         -moz-transform: rotateX(20deg);
+          -ms-transform: rotateX(20deg);
+              transform: rotateX(20deg);
+    }
+
+    button:active {
+      top: 0px;
+      box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
+      background: rgba( 20, 224, 133, 1 );
+    }
+
+    header{
+        position: absolute;
         width: 100%;
-        height: 40px;
+        height: 45px;
         display: block;
         background-color: #000000;
-        }
-    </style>
+    }
+
+    dropdown:drop{
+        background-color: #3498D8;
+
+    }
+
+    h1{
+        color: grey;
+        font-size: medium;
+        padding: 0;
+        margin: 0;
+    }
+    h2{
+        color: grey;
+    }
+</style>
+
+    <script>
+function myFunction() {
+  var x = document.getElementById("Demo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
 </head>
 <body>
 
@@ -35,20 +128,40 @@
     </div>
 <br><br>
 <!--Duration: {{dur}}<br>-->
-Peripherals:
+<b>Peripherals:</b>
 <br>
 {% for names, peripherals in comb_lis %}
-{{names}} &nbsp;{{peripherals}} &nbsp;
-{% for vars_names, vars, vars_size, vars_type, temp2 in comb_lis2 %}
-<br>
+<b>{{names}}</b> &nbsp;<h1> Peripheral Address: {{peripherals}} &nbsp;</h1>
+{% for vars_names, vars, vars_size, vars_type, vals in comb_lis2 %}
  <!--<a href="/post_curr_check2/?b={{p}}" style="border:2px; border-style:solid; border-color:#003366;"> {{names}}</a>-->
-{{vars_names}} &nbsp; {{vars}} &nbsp;
+<b>Variable Name:</b> {{vars_names}} &nbsp;
+<h1>Variable Address: {{vars}} &nbsp;</h1>
+<b>Var. Input Type: </b> {{vars_type}} &nbsp;
 <br>
-{{vars_size}} &nbsp; {{vars_type}} &nbsp;
+<b>Var. Input Length:</b> {{vars_size}} &nbsp;
 <br>
-{% for key, value in temp2.items %}
-    {{ key }}: &nbsp; {{ value }} &nbsp;
-    <br>
+<b>Values:</b>
+<br>
+<!--
+<div class="w3-dropdown-click">
+  <button onclick="myFunction()" class="w3-button w3-black">Click Me!</button>
+  <a id="Demo" class="w3-dropdown-content w3-bar-block w3-border">
+      {% for k, v in vals.items %}
+
+      <a href="#" class="w3-bar-item w3-button"> <b>{{ k }} </b> {{ v }}</a>
+
+        <br>
+
+        {% endfor %}
+  </div>
+</div>
+-->
+{% for k, v in vals.items %}
+
+<b>{{ k }} </b> &nbsp; {{ v }} &nbsp;
+
+<br>
+
 {% endfor %}
 {% endfor %}
 <br>

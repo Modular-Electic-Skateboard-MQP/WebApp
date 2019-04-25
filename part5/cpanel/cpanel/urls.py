@@ -27,5 +27,8 @@ urlpatterns = [
     url(r'^create/',views.create,name='create'),
     url(r'^post_create/',views.post_create,name='post_create'),
     url(r'^check/',views.check,name='check'),
+    url(r'^curr_check/',views.curr_check,name='curr_check'),
     url(r'^post_check/',views.post_check,name='post_check'),
+    url(r'^post_curr_check/',views.post_curr_check,name='post_curr_check'),
+    url(r'^post_check2/',views.post_check2,name='post_check2'),
 ]
