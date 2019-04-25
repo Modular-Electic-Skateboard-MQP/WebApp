@@ -9,17 +9,7 @@
         right : 10px;
         top : 5px
         }
-        body{background: lightskyblue;
-            font-family: "Trebuchet MS";
-            margin: 0;
-            padding: 0}
-        header{
-            position: absolute;
-        width: 100%;
-        height: 40px;
-        display: block;
-        background-color: #000000;
-        }
+
     </style>
 </head>
 <body>
@@ -27,30 +17,12 @@
 
 <div>
 
-
-<header>
-<button type="button" onclick="location.href='{% url 'log' %}'" style="position: absolute; top: 5px; right: 5px">Logout</button>
-</header>
-
+<button type="button" onclick="location.href='{% url 'log' %}'">Logout</button>
     </div>
+Welcome {{e}}
 <br><br>
-<!--Duration: {{dur}}<br>-->
-Peripherals:
-<br>
-{% for names, peripherals in comb_lis %}
-{{names}} &nbsp;{{peripherals}} &nbsp;
-{% for vars_names, vars, vars_size, vars_type, vals in comb_lis2 %}
-<br>
- <!--<a href="/post_curr_check2/?b={{p}}" style="border:2px; border-style:solid; border-color:#003366;"> {{names}}</a>-->
-{{vars_names}} &nbsp; {{vars}} &nbsp;
-<br>
-{{vars_size}} &nbsp; {{vars_type}} &nbsp;
-<br>
-{{vals}} &nbsp;
-{% endfor %}
-<br>
-
-{% endfor %}
-
+Date: {{d}}<br>
+Work : {{w}}<br>
+Progress: {{p}}<br>
 </body>
 </html>
